@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\VentaController;
+use App\Models\Producto;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/ventas', [VentaController::class, 'index']);
+Route::get('/productos', [ProductoController::class, 'index']);
+
