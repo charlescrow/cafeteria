@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VentaRequest;
+use App\Models\Producto;
 use App\Models\Venta;
 use Illuminate\Http\Request;
 
@@ -14,19 +16,12 @@ class VentaController extends Controller
      */
     public function index()
     {
-        $info['ventas'] = Venta::with('producto')->get();
-        // dd($info);
+        $info = [
+            'ventas' => Venta::with('producto')->get(),
+            'productos' => Producto::all()
+        ];
+        
         return view('ventas.index', $info);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -35,53 +30,16 @@ class VentaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VentaRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $insert = Venta::create($request->all());
+        $info['ventas'] = Venta::get();
+        if($insert) {
+            return [
+                'success' => true,
+                'mensaje' => 'Venta registrada',
+                'data' => view('ventas.listado', $info)->render()
+            ];
+        }
     }
 }

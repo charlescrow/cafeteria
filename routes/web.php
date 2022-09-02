@@ -24,7 +24,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'ventas', 'as' => 'ventas.'], function () {
     
     Route::get('/listado', [VentaController::class, 'index'])->name('index');
-
+    Route::post('/crear', [VentaController::class, 'store'])->name('crear');
 });
 
 

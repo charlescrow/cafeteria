@@ -23,3 +23,4 @@ mix.js('resources/js/app.js', 'public/js')
     .sourceMaps();
 
 mix.js('resources/js/productos/principal.js', 'public/js/productos/principal.js');
+mix.js('resources/js/ventas/principal.js', 'public/js/ventas/principal.js');
