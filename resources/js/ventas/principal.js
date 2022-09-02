@@ -29,5 +29,5 @@ const guardarVenta = (form) => {
             $('.listadoVentas').empty().html(response.data);
             toastr['success'](response.mensaje);
         }
-    }).catch(error => console.error(error));;   
+    }).catch(error => toastr['error']('No hay stock suficiente'));  
 }

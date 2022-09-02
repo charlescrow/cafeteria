@@ -16,9 +16,11 @@ class VentaController extends Controller
      */
     public function index()
     {
+        $productos = Producto::where('stock', '<>', 0)->get();
+
         $info = [
             'ventas' => Venta::with('producto')->get(),
-            'productos' => Producto::all()
+            'productos' => $productos
         ];
         
         return view('ventas.index', $info);
