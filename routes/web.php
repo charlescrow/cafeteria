@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VentaController;
 use App\Models\Producto;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    
+    $info['mayorStock'] = DB::SELECT("
+        SELECT * FROM productos WHERE stock = (select MAX(stock) from productos)
+    ");
+
+    $info['masVendido'] = DB::SELECT("
+        select sum(ventas.cantidad) as cantidadMayor, p.nombre from ventas 
+        inner join productos as p on p.id = ventas.producto_id
+        group by producto_id 
+        order by cantidadMayor desc
+    ");
+
+    return view('welcome', $info);
+
 });
 
 /** Grupo de rutas ventas */
