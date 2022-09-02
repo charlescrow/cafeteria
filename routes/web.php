@@ -20,6 +20,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/ventas', [VentaController::class, 'index']);
-Route::get('/productos', [ProductoController::class, 'index']);
+/** Grupo de rutas ventas */
+Route::group(['prefix' => 'ventas', 'as' => 'ventas.'], function () {
+    
+    Route::get('/listado', [VentaController::class, 'index'])->name('index');
+
+});
+
+
+/** Grupo de rutas productos */
+Route::group(['prefix' => 'productos', 'as' => 'productos.'], function () {
+    
+    Route::get('/listado', [ProductoController::class, 'index'])->name('index');
+    Route::post('/crear', [ProductoController::class, 'store'])->name('crear');
+    Route::get('/editar/{producto}', [ProductoController::class, 'edit'])->name('editar');
+    Route::post('/actualizar', [ProductoController::class, 'update'])->name('actualizar');
+    Route::get('/eliminar/{producto}', [ProductoController::class, 'destroy'])->name('eliminar');
+
+});
 

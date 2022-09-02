@@ -19,6 +19,7 @@ class CreateProductosTable extends Migration
             $table->string('referencia')->nullable(false); 
             $table->integer('precio')->nullable(false);
             $table->integer('peso')->nullable(false);
+            $table->integer('categoria')->nullable(false);
             $table->integer('stock')->nullable(false);
             $table->timestamps();
         });

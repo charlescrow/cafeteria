@@ -1,8 +1,9 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"> </script>
 
 <style>
 li,ul{
@@ -186,14 +187,7 @@ li,ul{
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-.search input {
-    border: none;
-    font-size: 15px;
-    padding: 15px 9px;
-    width: 100%;
-    background: rgba(0, 0, 0, 0) url("../images/search.png") no-repeat scroll 99% 12px;
-    color: #8492af;
-}
+
 
 header {
     background: #ffffff none repeat scroll 0 0;
@@ -505,8 +499,8 @@ header {
                 <div class="navi">
                     <ul>
                         <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Inicio</span></a></li>
-                        <li><a href="/productos"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Productos</span></a></li>
-                        <li><a href="/ventas"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Ventas</span></a></li>
+                        <li><a href="{{route('productos.index')}}"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Productos</span></a></li>
+                        <li><a href="{{route('ventas.index')}}"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Ventas</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -536,11 +530,15 @@ header {
                     </header>
                 </div>
                 <div class="user-dashboard">
+                    @routes
                     @yield('content')
                 </div>
             </div>
         </div>
-
     </div>
 
 </body>
+
+<script type="text/javascript">
+    window.CSRF_TOKEN = '{{ csrf_token() }}';
+</script>

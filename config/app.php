@@ -165,7 +165,10 @@ return [
         /*
          * Package Service Providers...
          */
-
+        /*
+         * Package Service Providers...
+         */
+        Tightenco\Ziggy\ZiggyServiceProvider::class,
         /*
          * Application Service Providers...
          */

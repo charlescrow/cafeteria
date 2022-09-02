@@ -7,38 +7,47 @@
                 <h3>Listado de productos</h3> <br><br>
             </div>
             <div class="col-2">
-                <button class="btn btn-primary"> <i class="fa fa-plus"></i> Nuevo producto</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalProducto"> 
+                    <i class="fa fa-plus"></i> Nuevo producto
+                </button>
             </div>
         </div>
     </div>
-    <table class="table">
-    <thead>
-        <tr>
-            <th  class="text-center">#</th>
-            <th  class="text-center">Nombre</th>
-            <th  class="text-center">Referencia</th>
-            <th  class="text-center">Precio</th>
-            <th  class="text-center">Peso</th>
-            <th  class="text-center">Stock</th>
-            <th  class="text-center">Opciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($productos as $index => $producto)
-        <tr >
-            <td class="text-center">{{$index+1}}</td>
-            <td >{{$producto?->nombre}}</td>
-            <td class="text-center">{{$producto?->referencia}}</td>
-            <td class="text-center">{{$producto?->precio}}</td>
-            <td class="text-center">{{$producto?->peso}}</td>
-            <td class="text-center">{{$producto?->stock}}</td>
-            <td class="text-center">
-                <a href=""><i class="btn btn-sm btn-danger fa fa-trash"></i></a>
-                <a href=""><i class="btn btn-sm btn-primary fa fa-edit"></i></a>
-            </td>
-        </tr>
-        @endforeach      
-        </tbody>
-    </table>
+    <div class="listadoProductos">
+        @include('productos.listado')
+    </div>
 
+<!-- Modal de crear producto -->
+@include('productos.crear')
+
+<!-- Modal editar producto -->
+<div class="modal fade" id="modalEditarProducto" tabindex="-1" role="dialog" aria-labelledby="modalProductoTitle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form id="formEditarProducto">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalProductoTitle">Actualizar producto</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div id="infoProducto"></div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>   
+    </div>
+</div>
+
+
+<script src="{{mix('js/productos/principal.js')}}"></script>
 @endsection
+
